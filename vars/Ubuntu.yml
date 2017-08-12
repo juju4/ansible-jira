@@ -1,2 +1,4 @@
 ---
 # vars file for jira (Ubuntu specific)
+
+java_home: /usr/lib/jvm/java-8-openjdk-amd64/jre

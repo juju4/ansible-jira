@@ -19,15 +19,16 @@ APP=jira
 # Name of the user to run as
 USER=jira
 # Location of application's bin directory
-BASE=/opt/atlassian/jira/atlassian-jira-{{ jira_version }}-standalone
+BASE=/opt/atlassian/jira/atlassian-jira-core-{{ jira_version }}-standalone
 # JIRA home directory
 JIRA_HOME={{ jira_home_dir }}
+JRE_HOME={{ java_home }}
 
 case "$1" in
   # Start command
   start)
     echo "Starting $APP"
-    /bin/su - $USER -c "export JIRA_HOME=${JIRA_HOME}; $BASE/bin/startup.sh &> /dev/null"
+    /bin/su - $USER -c "export JIRA_HOME=${JIRA_HOME} JRE_HOME=${JRE_HOME}; $BASE/bin/startup.sh &> /dev/null"
     ;;
   # Stop command
   stop)
@@ -35,14 +36,19 @@ case "$1" in
     /bin/su - $USER -c "$BASE/bin/shutdown.sh &> /dev/null"
     echo "$APP stopped successfully"
     ;;
-   # Restart command
-   restart)
-        $0 stop
-        sleep 5
-        $0 start
-        ;;
+  # Restart command
+  restart)
+    $0 stop
+    sleep 5
+    $0 start
+    ;;
+  status)
+    pid=`cat $BASE/work/catalina.pid 2>/dev/null`
+    echo "Status $APP (pid=$pid)"
+    [ -n "$pid" ] && ps -p $pid
+    ;;
   *)
-    echo "Usage: /etc/init.d/$APP {start|restart|stop}"
+    echo "Usage: /etc/init.d/$APP {start|restart|stop|status}"
     exit 1
     ;;
 esac
