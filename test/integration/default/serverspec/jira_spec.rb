@@ -25,8 +25,7 @@ describe process("java") do
   its(:args) { should match /-Djira.home=\/var\/atlassian\/application-data\/jira/ }
 end
 
-## missing 'ss' on centos/redhat7
-describe port(8080), :if => os[:family] == 'ubuntu' || os[:family] == 'debian' do
+describe port(8080) do
   it { should be_listening.with('tcp') }
 end
 
