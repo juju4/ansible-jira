@@ -15,3 +15,8 @@
   with_items:
     - ndg-httpsclient
   when: ansible_distribution_release == 'trusty'
+
+- name: Ensure network tools are present (serverspec testing)
+  package:
+    name: iproute2
+    state: present
