@@ -23,18 +23,27 @@ BASE=/opt/atlassian/jira/atlassian-jira-core-{{ jira_version }}-standalone
 # JIRA home directory
 JIRA_HOME={{ jira_home_dir }}
 JRE_HOME={{ java_home }}
+[ -f $BASE/work/catalina.pid ] && pid=`cat $BASE/work/catalina.pid 2>/dev/null`
 
 case "$1" in
   # Start command
   start)
-    echo "Starting $APP"
-    /bin/su - $USER -c "export JIRA_HOME=${JIRA_HOME} JRE_HOME=${JRE_HOME}; $BASE/bin/startup.sh &> /dev/null"
+    if [ -n "$pid" -a X`ps -p $pid >/dev/null 2>&1; echo $?` = 'X0' ]; then
+        echo "$APP already started (pid=$pid)"
+    else
+        echo "Starting $APP"
+        /bin/su - $USER -c "export JIRA_HOME=${JIRA_HOME} JRE_HOME=${JRE_HOME}; $BASE/bin/startup.sh"
+    fi
     ;;
   # Stop command
   stop)
-    echo "Stopping $APP"
-    /bin/su - $USER -c "$BASE/bin/shutdown.sh &> /dev/null"
-    echo "$APP stopped successfully"
+    if [ -n "$pid" -a X`ps -p $pid >/dev/null 2>&1; echo $?` = 'X0' ]; then
+        echo "Stopping $APP"
+        /bin/su - $USER -c "$BASE/bin/shutdown.sh"
+        echo "$APP stopped successfully"
+    else
+        echo "$APP not running"
+    fi
     ;;
   # Restart command
   restart)
