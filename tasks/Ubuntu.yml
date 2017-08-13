@@ -20,3 +20,4 @@
   package:
     name: iproute2
     state: present
+  when: jira_testing

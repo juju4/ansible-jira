@@ -9,3 +9,5 @@ jira_jvm_maximum_memory: 768m
 # https://jira.atlassian.com/browse/JRASERVER-46152
 # https://confluence.atlassian.com/jirakb/openjdk-is-not-supported-292126762.html
 jira_allow_openjdk: true
+
+jira_testing: false
