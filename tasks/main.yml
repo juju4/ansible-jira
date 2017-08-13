@@ -13,6 +13,8 @@
   when: ansible_distribution == "Ubuntu"
   tags: jira
 
+- include: java-home.yml
+
 - name: Create JIRA group
   group: name=jira state=present
   tags: jira
