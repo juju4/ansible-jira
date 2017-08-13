@@ -107,9 +107,13 @@
   when: jira_allow_openjdk
 
 - name: Ensure JIRA service is started and enabled on boot
-  service: >
-    name=jira
-    state=started
-    pattern='java -Djava.util.logging.config.file=/opt/atlassian/jira/atlassian-jira-core-{{ jira_version }}-standalone/conf/logging.properties'
-    enabled=yes
+## works locally with kitchen+docker but not in travis???
+#  service: >
+#    name=jira
+#    state=started
+#    pattern='java -Djava.util.logging.config.file=/opt/atlassian/jira/atlassian-jira-core-{{ jira_version }}-standalone/conf/logging.properties'
+#    enabled=yes
+## debug attempt
+  command: "/etc/init.d/jira start"
+  changed_when: false
   tags: jira
