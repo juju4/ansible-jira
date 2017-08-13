@@ -25,9 +25,9 @@ describe process("java") do
   its(:args) { should match /-Djira.home=\/var\/atlassian\/application-data\/jira/ }
 end
 
-describe port(8080) do
-  it { should be_listening.with('tcp') }
-end
+#describe port(8080) do
+#  it { should be_listening.with('tcp') }
+#end
 
 describe file('/opt/atlassian/jira/atlassian-jira-core-7.4.2-standalone/conf/server.xml') do
   it { should be_file }
