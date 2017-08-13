@@ -2,6 +2,7 @@ jira
 ====
 
 [![Ansible Role](https://img.shields.io/ansible/role/3981.svg)](https://galaxy.ansible.com/list#/roles/3981)
+[![Build Status - Master](https://travis-ci.org/juju4/ansible-jira.svg?branch=master)](https://travis-ci.org/juju4/ansible-jira)
 
 Installs JIRA.
 
