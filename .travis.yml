@@ -55,6 +55,8 @@ script:
 after_failure:
   # Check what happened on systemd systems.
   - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'cat /tmp/idempotency.test'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'ls /opt/atlassian/jira/atlassian-jira-core-*-standalone/conf/server.xml'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'cat /opt/atlassian/jira/atlassian-jira-core-*-standalone/conf/server.xml'
 
 after_script:
   - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'cat /opt/atlassian/jira/atlassian-jira-core-*-standalone/logs/catalina.out'
