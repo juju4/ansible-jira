@@ -11,6 +11,7 @@ fi
 
 #[ ! -d $rolesdir/kbrebanov.java ] && git clone https://github.com/kbrebanov/ansible-java $rolesdir/kbrebanov.java
 [ ! -d $rolesdir/kbrebanov.java ] && git clone https://github.com/juju4/ansible-java $rolesdir/kbrebanov.java
+[ ! -d $rolesdir/geerlingguy.java ] && git clone https://github.com/geerlingguy/ansible-role-java $rolesdir/geerlingguy.java
 
 ## galaxy naming: kitchen fails to transfer symlink folder
 [ ! -e $rolesdir/kbrebanov.jira ] && cp -R $rolesdir/ansible-jira $rolesdir/kbrebanov.jira
