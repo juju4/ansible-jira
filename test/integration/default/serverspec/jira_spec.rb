@@ -31,6 +31,5 @@ end
 
 describe file('/opt/atlassian/jira/atlassian-jira-core-7.13.3-standalone/conf/server.xml') do
   it { should be_file }
-  its(:content) { should match /Atlassian JIRA Standalone Edition Tomcat Configuration/ }
   its(:content) { should match /<Connector port="8080"/ }
 end
