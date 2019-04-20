@@ -1,13 +1,16 @@
 ---
 # defaults file for jira
 
-jira_version: 7.4.2
-jira_archive_sha256sum: 348f005bc4383ceac68dea93a5caded6eeb77ef65796d2a425fa08b89b84bc0b
+jira_version: 7.13.3
+jira_archive_sha256sum: a6ede8d87a216180b35baf0ec82657e88d4de9700af9296b0f5261e3044bc56c
 jira_jvm_minimum_memory: 384m
 jira_jvm_maximum_memory: 768m
 
 # https://jira.atlassian.com/browse/JRASERVER-46152
 # https://confluence.atlassian.com/jirakb/openjdk-is-not-supported-292126762.html
+# https://jira.atlassian.com/browse/JRASERVER-41589
+# https://community.atlassian.com/t5/Agile-articles/Java-11-OpenJDK-support-update-for-Server-and-Data-Center/ba-p/967836#M392
+# https://community.developer.atlassian.com/t/java-11-openjdk-support-update-for-server-and-data-center-products/25718
 jira_allow_openjdk: true
 
 jira_testing: false
