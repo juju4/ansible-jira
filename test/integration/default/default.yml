@@ -3,6 +3,10 @@
 - hosts: all
   vars:
     - jira_testing: true
+# Jira 7.6.11+ supports openjdk-8 only, upcoming 8.2+ will support both openjdk-8 and 11
+# https://community.atlassian.com/t5/Agile-articles/Java-11-OpenJDK-support-update-for-Server-and-Data-Center/ba-p/967836
+    - java_packages:
+        - openjdk-8-jdk
   roles:
     - kbrebanov.jira
 
