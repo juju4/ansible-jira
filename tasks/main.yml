@@ -6,7 +6,7 @@
   tags: jira
 
 - include: CentOS.yml
-  when: ansible_distribution == "CentOS"
+  when: ansible_os_family == "RedHat"
   tags: jira
 
 - include: Ubuntu.yml
@@ -107,6 +107,13 @@
     replace: 'grep -E "(openjdk|java) version"'
     backup: yes
   when: jira_allow_openjdk
+
+- name: RedHat | Review init script - fix wrong jre path
+  replace:
+    dest: /etc/rc.d/init.d/jira
+    regexp: '/jre/..$'
+    replace: '/jre'
+  when: ansible_os_family == "RedHat"
 
 - name: Ensure JIRA service is started and enabled on boot
 ## works locally with kitchen+docker but not in travis???
