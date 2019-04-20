@@ -8,4 +8,4 @@
 
 - name: set java_home
   set_fact:
-    java_home: "{{ javasettings.stdout | default('') }}/.."
+    java_home: "{{ javasettings.stdout | default('') }}"
