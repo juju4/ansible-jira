@@ -29,7 +29,7 @@ end
 #  it { should be_listening.with('tcp') }
 #end
 
-describe file('/opt/atlassian/jira/atlassian-jira-core-7.13.3-standalone/conf/server.xml') do
+describe file('/opt/atlassian/jira/atlassian-jira-core-8.0.1-standalone/conf/server.xml') do
   it { should be_file }
   its(:content) { should match /<Connector port="8080"/ }
 end
