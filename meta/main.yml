@@ -118,8 +118,9 @@ galaxy_info:
   #- system
   #- web
 dependencies:
- - { role: kbrebanov.java, java_implementation: oracle, java_oracle_version: 8 }
+# - { role: kbrebanov.java, java_implementation: oracle, java_oracle_version: 8 }
 # - { role: kbrebanov.java, java_openjdk_version: 8 }
+ - { role: geerlingguy.java }
   # List your role dependencies here, one per line. Only
   # dependencies available via galaxy should be listed here.
   # Be sure to remove the '[]' above if you add dependencies
