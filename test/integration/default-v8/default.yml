@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  vars:
+    - jira_testing: true
+    - jira_version: 8.1.0
+    - jira_archive_sha256sum: 40e463ad8b0bcb952d49f8526f3605fd88c24e66b43988256f9bcfb513644084
+  pre_tasks:
+    - set_fact:
+# Jira 7.6.11+ supports openjdk-8 only, upcoming 8.2+ will support both openjdk-8 and 11
+# https://community.atlassian.com/t5/Agile-articles/Java-11-OpenJDK-support-update-for-Server-and-Data-Center/ba-p/967836
+        java_packages:
+          - openjdk-8-jdk
+      when: ansible_distribution_release == 'xenial' or ansible_distribution_release == 'bionic'
+    - set_fact:
+        java_packages:
+          - java-1.8.0-openjdk
+      when: ansible_os_family == "RedHat" and ansible_distribution_version.split('.')[0] == '7'
+  roles:
+    - kbrebanov.jira
+
