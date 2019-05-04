@@ -15,6 +15,11 @@
 
 - include: java-home.yml
 
+- name: Ensure Tomcat dependencies are present
+  package:
+    name: "{{ jira_pkg_deps }}"
+    state: present
+
 - name: Create JIRA group
   group: name=jira state=present
   tags: jira

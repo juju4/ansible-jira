@@ -1,2 +1,6 @@
 ---
 # vars file for jira (Ubuntu specific)
+
+jira_pkg_deps:
+  - libtcnative-1
+  - libtcnative-1-dbgsym

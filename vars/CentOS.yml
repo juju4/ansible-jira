@@ -1,2 +1,5 @@
 ---
 # vars file for jira (CentOS specific)
+
+jira_pkg_deps:
+  - tomcat-native
