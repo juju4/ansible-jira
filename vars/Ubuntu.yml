@@ -3,4 +3,4 @@
 
 jira_pkg_deps:
   - libtcnative-1
-  - libtcnative-1-dbgsym
+#  - libtcnative-1-dbgsym
