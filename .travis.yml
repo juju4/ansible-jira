@@ -37,7 +37,7 @@ before_install:
   - find -ls
 ## use appropriate role path and not github name
   - "[ -f get-dependencies.sh ] && sh -x get-dependencies.sh"
-  - sudo pip install ansible
+  - sudo pip install ansible ansible-lint
   - gem install kitchen
   - gem install kitchen-ansible
   - gem install kitchen-sync
@@ -47,6 +47,7 @@ before_install:
   - KITCHEN_YAML=.kitchen.docker.yml kitchen diagnose --all
 
 script:
+  - ansible-lint tasks/main.yml || true
 ## avoid locale issue under xenial docker, https://github.com/pypa/pip/issues/3575
   - export LC_ALL=C.UTF-8
   - export LANG=C.UTF-8
@@ -55,13 +56,20 @@ script:
 after_failure:
   # Check what happened on systemd systems.
   - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'cat /tmp/idempotency.test'
-  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'ls /opt/atlassian/jira/atlassian-jira-core-*-standalone/conf/server.xml'
-  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'cat /opt/atlassian/jira/atlassian-jira-core-*-standalone/conf/server.xml'
 
 after_script:
-  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'cat /opt/atlassian/jira/atlassian-jira-core-*-standalone/logs/catalina.out'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'ls /opt/atlassian/jira/current/conf/server.xml'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'cat /opt/atlassian/jira/current/conf/server.xml'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'cat /opt/atlassian/jira/current/logs/catalina.out'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'netstat -anp'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'ss -nlp'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'cat /tmp/idempotency.test'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'systemctl -l --no-pager status'
   - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'systemctl -l --no-pager status jira'
   - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'journalctl -xe --no-pager'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'cat /etc/locale.conf'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'localectl status'
+  - KITCHEN_YAML=.kitchen.docker.yml kitchen exec ${suite}-${distribution}-${version//./} -c 'localectl --no-pager list-locales'
   # Clean up
   - KITCHEN_YAML=.kitchen.docker.yml kitchen destroy ${suite}-${distribution}-${version//./}
 
