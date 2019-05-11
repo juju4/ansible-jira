@@ -67,6 +67,8 @@
     dest={{ jira_work_dir }}/{{ jira_archive }}
     sha256sum={{ jira_archive_sha256sum }}
   tags: jira
+  register: dl_result
+  until: dl_result is success
 
 - name: Extract JIRA to install directory
   unarchive: >
