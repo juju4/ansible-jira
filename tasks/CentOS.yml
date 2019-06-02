@@ -5,4 +5,4 @@
   package:
     name: iproute
     state: present
-  when: jira_testing
+  when: jira_testing|bool

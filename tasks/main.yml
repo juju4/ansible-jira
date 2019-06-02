@@ -113,7 +113,7 @@
     regexp: 'grep "java version"'
     replace: 'grep -E "(openjdk|java) version"'
     backup: yes
-  when: jira_allow_openjdk
+  when: jira_allow_openjdk|bool
 
 - name: Ensure JIRA service is started and enabled on boot
 ## works locally with kitchen+docker but not in travis???
