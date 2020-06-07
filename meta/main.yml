@@ -1,6 +1,7 @@
 ---
 galaxy_info:
-  author: Kevin Brebanov
+  role_name: jira
+  author: juju4
   description: Installs JIRA
   company:
   license: BSD

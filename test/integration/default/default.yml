@@ -15,4 +15,4 @@
           - java-1.8.0-openjdk
       when: ansible_os_family == "RedHat" and ansible_distribution_version.split('.')[0] == '7'
   roles:
-    - kbrebanov.jira
+    - juju4.jira
