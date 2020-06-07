@@ -19,7 +19,7 @@ env:
 #  - distribution: debian
 #    version: 9
   - distribution: centos
-    version: 7
+    version: 8
     suite: default-v8
   - distribution: ubuntu
     version: 20.04
