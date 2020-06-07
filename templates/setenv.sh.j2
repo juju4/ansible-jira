@@ -38,7 +38,11 @@ JVM_REQUIRED_ARGS='-Djava.awt.headless=true -Datlassian.standalone=JIRA -Dorg.ap
 # from suppressing stack traces if a given type of exception occurs frequently,
 # which could make it harder for support to diagnose a problem.
 #-----------------------------------------------------------------------------------
+{% if (ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int >= 20) %}
+JVM_EXTRA_ARGS="-XX:-OmitStackTraceInFastThrow"
+{% else %}
 JVM_EXTRA_ARGS="-XX:+PrintGCDateStamps -XX:-OmitStackTraceInFastThrow"
+{% endif %}
 
 PRGDIR=`dirname "$0"`
 cat "${PRGDIR}"/jirabanner.txt
