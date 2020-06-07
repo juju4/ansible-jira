@@ -31,6 +31,10 @@ suites:
   - name: default
     run_list:
     attributes:
+    includes:
+      - ubuntu-18.04
+      - centos-8
+      - centos-7
   - name: default-v8
     run_list:
     attributes:
